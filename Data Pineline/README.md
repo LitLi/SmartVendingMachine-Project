@@ -1,16 +1,9 @@
-# SmartVendingMachine-Project
+# Data Pipeline
 
-This project is supporting the ISV who's provider of Smart Vending Machine solution in chinar,help to develop a way to monitor the working status of its machines and to get real-time information on replenishment needs.
+In this project, Vending Machine's Android client send status message to IoT Hub per 3 mins, and IoT Hub as SA's input, and SA process the data message then send to Azure SQL DB tables. PowerBI will access the Azure SQL DB to present the data to their devices operator and goods manager. 
+*Figure 1. Smart Vending Machine solution architecture*
 
-## Pain Point
+![Smart Vending Machine solution architecture]({{ site.baseurl }}/images/GumpCome_010.PNG)
 
-To date, this ISV has no solution that can monitor vending machine health status or get real-time information on whether a device is working. Any device needing attention usually requires two onsite visits—once to diagnose the issue and again to return with the component to fix the issue. All this adds to the cost of maintaining the machines. And also, their goods manager must check on the selling status of the vending machines to see if they need replenishing. 
 
-## Solution 
-Use Azure IoT Hub to collect data on supplies and device health for all vending machines and send to the uniform management platform for daily monitoring. This will help the staff to diagnose device issues online, which can save on maintenance costs and help realize predictive maintenance cost savings.
 
-In this solution, ISV will use following Microsoft Technology:
-- Azure IoT Hub
-- Stream Analytics
-- Azure SQL Database
-- Power BI
