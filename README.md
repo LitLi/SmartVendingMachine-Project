@@ -19,4 +19,4 @@ In this solution, ISV will use following Microsoft Technology:
 In this project, Vending Machine Client OS is Android, need integrated the IoT Hub Android SDK on (Sample: https://github.com/Azure/azure-iot-sdk-java/tree/master/device/samples/android-sample). Help ISV team to update protocal as AMQP and offer Android IoT Hub Intergration source code in https://github.com/LitLi/SmartVendingMachine-Project/blob/master/Android%20Client/IotHelper.java 
 
 ## Data Pipeline
-In this project, help ISV to setup and configure IoT Hub, SA, and Azure SQL Database. More detail content and script files in /Data Pipeline(/Data Pipeline) . 
+In this project, help ISV to setup and configure IoT Hub, SA, and Azure SQL Database. More detail content and script files in ![Data Pipeline](/Data Pipeline) . 
