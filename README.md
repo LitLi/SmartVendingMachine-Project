@@ -1,4 +1,4 @@
- # SmartVendingMachine-Project
+# SmartVendingMachine-Project
 
 This project is supporting the ISV who's provider of Smart Vending Machine solution in chinar,help to develop a way to monitor the working status of its machines and to get real-time information on replenishment needs.
 
