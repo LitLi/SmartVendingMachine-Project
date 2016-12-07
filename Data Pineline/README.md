@@ -10,7 +10,7 @@ In this project, Vending Machine's Android client send status message to IoT Hub
 Pls check with DataMessage.docx file, Vending Machine client will package devices data follow this Jason format to IoT Hub per 3mins
 
 ## Azure SQL DB
-Support ISV design vending machine devices status db on Azure SQLDB, script file see GCSVMStatusDB.sql and GCSVMStatusDB_Insert.sql
+Support ISV design vending machine devices status db on Azure SQLDB, script files see GCSVMStatusDB.sql and GCSVMStatusDB_Insert.sql
 
 ## Azure Streame Analytics 
 Support ISV create SA services on Azure, and setup IoT Hub as Input stream, and setup three table in Azure DB as output stream. Create SA Query as following :
