@@ -14,3 +14,6 @@ In this solution, ISV will use following Microsoft Technology:
 - Stream Analytics
 - Azure SQL Database
 - Power BI
+
+## Ardroid Client 
+In this Project, Vending Machine Client OS is Android, need integrated the IoT Hub Android SDK on (Sample: https://github.com/Azure/azure-iot-sdk-java/tree/master/device/samples/android-sample). 
