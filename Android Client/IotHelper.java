@@ -22,7 +22,7 @@ import java.net.URISyntaxException;
  */
 public class IotHelper {
     private static final String TAG = "IotHelper";
-    String connString = "HostName=iotdemo.azure-devices.cn;DeviceId=myFirstJavaDevice;SharedAccessKey=od1/RiE0ItHtbuewQ/5Tgw==";
+    String connString = "HostName=iotdemo.azure-devices.cn;DeviceId=myFirstJavaDevice;SharedAccessKey=#######################";
 
     public void SendMessage(String message) throws URISyntaxException, IOException {
         IotHubClientProtocol protocol = IotHubClientProtocol.AMQPS;
