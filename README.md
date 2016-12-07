@@ -22,4 +22,4 @@ In this project, Vending Machine Client OS is Android, need integrated the IoT H
 In this project, help ISV to setup and configure IoT Hub, SA, and Azure SQL Database. More detail content and script files in [Data Pipeline](https://github.com/LitLi/SmartVendingMachine-Project/tree/master/Data%20Pineline) . 
 
 ## Other Content
-This project is in MS DX Ascend+ programe, more result pls reference [Ascend+](https://microsoft.github.io/techcasestudies/iot/2016/11/08/GumpCome.html)
+This project is in MS DX Ascend+ programm, more result please reference [Ascend+](https://microsoft.github.io/techcasestudies/iot/2016/11/08/GumpCome.html)
