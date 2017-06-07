@@ -276,9 +276,11 @@ Figure 6. QT-Cloud Parking Lot Satus Page ![QT-Cloud Parking Lot Satus Page](/Im
 Through this technical engagement, the QTParking can provide the total security solution to Parking lot users, and strengthened their confidence in using Azure as their platform. As Microsoft bizspark member, QTParking will be graduate soon, they will continue using Azure as their cloud platform and will be Microsoft EA account.   
 
 ## Great Team ##
-Figure 7. QTParking Hackfest Team at Microsoft![QTParking Hackfest Team](/Images/QTParking_007.JPG)
+Figure 7. QTParking Hackfest Team at Microsoft
+![QTParking Hackfest Team](/Images/QTParking_007.JPG)
 
-Figure 8. QTParking Hackfest Team at Office![QTParking Hackfest Team](/Images/QTParking_008.JPG)
+Figure 8. QTParking Hackfest Team at Office
+![QTParking Hackfest Team](/Images/QTParking_008.JPG)
 
 
 Special thanks QTParking Team, Microsoft China DX Technical Evangelist team and Audience Evanglism Team. This project team includes the following:
