@@ -277,9 +277,11 @@ Through this technical engagement, the QTParking can provide the total security 
 
 ## Great Team ##
 Figure 7. QTParking Hackfest Team at Microsoft
+
 ![QTParking Hackfest Team](/Images/QTParking_007.JPG)
 
 Figure 8. QTParking Hackfest Team at Office
+
 ![QTParking Hackfest Team](/Images/QTParking_008.JPG)
 
 
