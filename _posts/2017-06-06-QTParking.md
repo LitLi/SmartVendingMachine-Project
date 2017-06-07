@@ -160,7 +160,7 @@ In this segment, Microsoft's China DX Technical Evangelist team help QTParking t
 ``` 
 这里缺上传的Join的消息
 ```
-- Device Managment CMD Message to Box, such as register response , device restart, device upgrade, etc.
+- Device Managment CMD Message to Box, such as register response , device restart, device upgrade, etc. 
 ``` 
 {
   "header":{
