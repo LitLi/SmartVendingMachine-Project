@@ -153,11 +153,11 @@ Figure 4. QT-Cloud Kafka VM Console on Azure![QT-Cloud Kafka VM Console on Azure
 
 ### Device Management Message Design
 In this segment, Microsoft's China DX Technical Evangelist team help QTParking to design the device managment message content. There are three device management message defined in here:
-- Device Managment CMD Message from Box, such as device register message 
+1.  Device Managment CMD Message from Box, such as device register message 
 ``` 
 这里缺上传的Join的消息
 ```
-- Device Managment CMD Message to Box, such as register response , device restart, device upgrade, etc. 
+2.  Device Managment CMD Message to Box, such as register response , device restart, device upgrade, etc. 
 ``` 
 {
   "header":{
@@ -206,7 +206,7 @@ Register Response Sample as following
 }
 ```
 
-- Device Managment Alert Message from Box, such as device health status message
+3.  Device Managment Alert Message from Box, such as device health status message
 ```
 {
   "header":{
@@ -265,7 +265,7 @@ public class MarkManagementController extends BaseParentHandler{
         String address = request.getParameter("address");
 	......
    ```
-This model can be integrated with QT-Cloud managment portal, administrator can operate the device managment task such as New Device ,Edit Device ,Set Task CMD ect as Figure 5 and Figure 6.
+This model can be integrated with QT-Cloud managment portal. In the managment portal, administrator can operate the device managment task such as New Device ,Edit Device ,Set Task CMD etc. As Figure 5 and Figure 6.
 
 Figure 5. QT-Cloud Device Managment Page ![QT-Cloud Device Managment Page](/Images/QTParking_005.PNG)
 
@@ -275,7 +275,7 @@ Figure 6. QT-Cloud Parking Lot Satus Page ![QT-Cloud Parking Lot Satus Page](/Im
 
 Through this technical engagement, the QTParking can provide the total security solution to Parking lot users, and strengthened their confidence in using Azure as their platform. As Microsoft bizspark member, QTParking will be graduate soon, they will continue using Azure as their cloud platform and will be Microsoft EA account.   
 
-##Great Team##
+## Great Team ##
 Figure 7. QTParking Hackfest Team at Microsoft![QTParking Hackfest Team](/Images/QTParking_007.JPG)
 
 Figure 8. QTParking Hackfest Team at Office![QTParking Hackfest Team](/Images/QTParking_008.JPG)
