@@ -46,11 +46,11 @@ In this Kafka Security on Azure solution, QTParking will use following Microsoft
 The QTParking Kafka Security on Azure solution architecture will be represented as follows:
 - Update the QT-Cloud Paas Services architect to add device managment Model in API service and in Kafka mesessage design as Figure 1.
 
-Figure 1. QT-Cloud Paas Services Architecture![QT-Cloud Paas Services Architecture]({{site.baseurl}}/images/QTParking_001.PNG)
+Figure 1. QT-Cloud Paas Services Architecture![QT-Cloud Paas Services Architecture](/images/QTParking_001.PNG)
 
 - Define Device Managment Model architecture and message flow in this model, through this model Metis Box as a IoT Gateway can send the device register request to implement it securely register and get the access Token (Reference the red message flow). Also, Metix Box can use device managment API to send it's health status data(Reference the green message flow). 
 
-Figure 2. QT-Cloud Device Management Model Architecture![QT-Cloud Device Management Model Architecture]({{site.baseurl}}/images/QTParking_002.PNG)
+Figure 2. QT-Cloud Device Management Model Architecture![QT-Cloud Device Management Model Architecture](/images/QTParking_002.PNG)
 
 ## Device used & Code artifacts
 Microsoft's China DX Technical Evangelist team and the QTParking dev team split the engagement into three segments 
@@ -146,9 +146,9 @@ public BaseParkBoxData(JSONObject data) {
 ```
 QTParking team deploy the Kafka instance on Azure VM, and use MySQL Database on Azure as data service, the Figure 3 and Figure 4 are screenshot of their subscribtion managment portal.
 
-Figure 3. QT-Cloud Kafka VM on Azure![QT-Cloud Kafka VM on Azure]({{site.baseurl}}/images/QTParking_003.JPG)
+Figure 3. QT-Cloud Kafka VM on Azure![QT-Cloud Kafka VM on Azure](/images/QTParking_003.JPG)
 
-Figure 4. QT-Cloud Kafka VM Console on Azure![QT-Cloud Kafka VM Console on Azure]({{site.baseurl}}/images/QTParking_004.JPG)
+Figure 4. QT-Cloud Kafka VM Console on Azure![QT-Cloud Kafka VM Console on Azure](/images/QTParking_004.JPG)
 
 ### Device Management Message Design
 In this segment, Microsoft's China DX Technical Evangelist team help QTParking to design the device managment message content. There are three device management message defined in here:
