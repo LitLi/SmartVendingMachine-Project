@@ -46,7 +46,11 @@ In this Kafka Security on Azure solution, QTParking will use following Microsoft
 The QTParking Kafka Security on Azure solution architecture will be represented as follows:
 - Update the QT-Cloud Paas Services architect to add device managment Model in API service and in Kafka mesessage design as Figure 1.
 
+<<<<<<< HEAD
 Figure 1. QT-Cloud Paas Services Architecture![QT-Cloud Paas Services Architecture](/Images/QTParking_001.PNG)
+=======
+Figure 1. QT-Cloud Paas Services Architecture![QT-Cloud Paas Services Architecture](./images/QTParking_001.PNG)
+>>>>>>> origin/master
 
 - Define Device Managment Model architecture and message flow in this model, through this model Metis Box as a IoT Gateway can send the device register request to implement it securely register and get the access Token (Reference the red message flow). Also, Metix Box can use device managment API to send it's health status data(Reference the green message flow). 
 
