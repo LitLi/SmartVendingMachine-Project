@@ -46,11 +46,11 @@ In this Kafka Security on Azure solution, QTParking will use following Microsoft
 The QTParking Kafka Security on Azure solution architecture will be represented as follows:
 - Update the QT-Cloud Paas Services architect to add device managment Model in API service and in Kafka mesessage design as Figure 1.
 
-Figure 1. QT-Cloud Paas Services Architecture![QT-Cloud Paas Services Architecture](/images/QTParking_001.PNG)
+Figure 1. QT-Cloud Paas Services Architecture![QT-Cloud Paas Services Architecture](/Images/QTParking_001.PNG)
 
 - Define Device Managment Model architecture and message flow in this model, through this model Metis Box as a IoT Gateway can send the device register request to implement it securely register and get the access Token (Reference the red message flow). Also, Metix Box can use device managment API to send it's health status data(Reference the green message flow). 
 
-Figure 2. QT-Cloud Device Management Model Architecture![QT-Cloud Device Management Model Architecture](/images/QTParking_002.PNG)
+Figure 2. QT-Cloud Device Management Model Architecture![QT-Cloud Device Management Model Architecture](/Images/QTParking_002.PNG)
 
 ## Device used & Code artifacts
 Microsoft's China DX Technical Evangelist team and the QTParking dev team split the engagement into three segments 
@@ -146,9 +146,9 @@ public BaseParkBoxData(JSONObject data) {
 ```
 QTParking team deploy the Kafka instance on Azure VM, and use MySQL Database on Azure as data service, the Figure 3 and Figure 4 are screenshot of their subscribtion managment portal.
 
-Figure 3. QT-Cloud Kafka VM on Azure![QT-Cloud Kafka VM on Azure](/images/QTParking_003.JPG)
+Figure 3. QT-Cloud Kafka VM on Azure![QT-Cloud Kafka VM on Azure](/Images/QTParking_003.JPG)
 
-Figure 4. QT-Cloud Kafka VM Console on Azure![QT-Cloud Kafka VM Console on Azure](/images/QTParking_004.JPG)
+Figure 4. QT-Cloud Kafka VM Console on Azure![QT-Cloud Kafka VM Console on Azure](/Images/QTParking_004.JPG)
 
 ### Device Management Message Design
 In this segment, Microsoft's China DX Technical Evangelist team help QTParking to design the device managment message content. There are three device management message defined in here:
@@ -266,18 +266,18 @@ public class MarkManagementController extends BaseParentHandler{
    ```
 This model can be integrated with QT-Cloud managment portal, administrator can operate the device managment task such as New Device ,Edit Device ,Set Task CMD ect as Figure 5 and Figure 6.
 
-Figure 5. QT-Cloud Device Managment Page ![QT-Cloud Device Managment Page]({{site.baseurl}}/images/QTParking_005.PNG)
+Figure 5. QT-Cloud Device Managment Page ![QT-Cloud Device Managment Page](/Images/QTParking_005.PNG)
 
-Figure 6. QT-Cloud Parking Lot Satus Page ![QT-Cloud Parking Lot Satus Page]({{site.baseurl}}/images/QTParking_006.PNG)
+Figure 6. QT-Cloud Parking Lot Satus Page ![QT-Cloud Parking Lot Satus Page](/Images/QTParking_006.PNG)
 
 ## Opportunities going forward
 
 Through this technical engagement, the QTParking can provide the total security solution to Parking lot users, and strengthened their confidence in using Azure as their platform. As Microsoft bizspark member, QTParking will be graduate soon, they will continue using Azure as their cloud platform and will be Microsoft EA account.   
 
 ##Great Team##
-Figure 7. QTParking Hackfest Team at Microsoft![QTParking Hackfest Team]({{site.baseurl}}/images/QTParking_007.JPG)
+Figure 7. QTParking Hackfest Team at Microsoft![QTParking Hackfest Team](/Images/QTParking_007.JPG)
 
-Figure 8. QTParking Hackfest Team at Office![QTParking Hackfest Team]({{site.baseurl}}/images/QTParking_008.JPG)
+Figure 8. QTParking Hackfest Team at Office![QTParking Hackfest Team](/Images/QTParking_008.JPG)
 
 Special thanks QTParking Team, Microsoft China DX Technical Evangelist team and Audience Evanglism Team. This project team includes the following:
 * William Qin -     QTParking CET
