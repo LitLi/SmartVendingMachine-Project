@@ -280,6 +280,7 @@ Figure 7. QTParking Hackfest Team at Microsoft![QTParking Hackfest Team](/Images
 
 Figure 8. QTParking Hackfest Team at Office![QTParking Hackfest Team](/Images/QTParking_008.JPG)
 
+
 Special thanks QTParking Team, Microsoft China DX Technical Evangelist team and Audience Evanglism Team. This project team includes the following:
 * William Qin -     QTParking CET
 * Jim Liu  - 	    QTParking CTO
