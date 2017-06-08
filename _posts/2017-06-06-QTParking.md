@@ -63,24 +63,27 @@ Microsoft's China DX Technical Evangelist team and the QTParking dev team split 
 In this segment, QTParking team focus on process the device request from Metis Box, identify message type, if it is register message, will store to register message repositry, and will trigge Device Managemnt Model to proccess it. Kafka message process code screenshot as following:
 
 ```java
-public BaseParkBoxData(JSONObject data) {
-		
-		if (null == data) {
-			throw new BoxDataFormatException("box data is null!");
-		}
-		
-		if (data.containsKey("dataId")) {
-			throw new BoxDataFormatException("[dataId] column can not be found in data.");
-		} 
-		
-		if (data.containsKey("carNum")) {
-			throw new BoxDataFormatException("[carNum] column can not be found in data.");
-		} 
-		
-		if (data.containsKey("enterTime")) {
-			throw new BoxDataFormatException("[enterTime] column can not be found in data.");
-		}
-		......
+public interface IDealer {
+
+	public void deal(ConsumerRecord<String, String> msg);
+	public void dealMsgs(Vector<ConsumerRecord<String, String>> msg); 
+}
+
+public interface KafkaService {
+
+	void sendMessage(String topicName, String message);
+
+}
+
+public class KafkaServiceImpl implements KafkaService {
+	private static final Logger LOGGER = LoggerFactory.getLogger(KafkaServiceImpl.class);
+	private KafkaProducer<String, String> inner;
+
+	private Properties producerProperties;
+
+	private Properties consumerProperties;
+
+	......
 
 	public void init() throws IOException {
 		
@@ -108,6 +111,17 @@ public BaseParkBoxData(JSONObject data) {
 		        });
 	    
 	}
+	......
+
+	class KafkaConsumerService extends Thread implements IDealer {
+		private final KafkaConsumer<String, String> consumer;
+		private final Dispatcher dispatcher = new Dispatcher(this,poolSize,queueDrainSize);
+
+		public KafkaConsumerService(String topic,Properties props) {
+			consumer = new KafkaConsumer<>(props);
+			List<String> topicList = FastJSONHelper.deserializeAny(topic,new TypeReference<List<String>>(){});
+			consumer.subscribe(topicList);
+		}
 
 		@Override
 		public void run() {
@@ -131,19 +145,59 @@ public BaseParkBoxData(JSONObject data) {
 							dispatcher.putMsg(record);
 						}
 					}
-					......
 
-	class KafkaConsumerService extends Thread implements IDealer {
-		private final KafkaConsumer<String, String> consumer;
-		private final Dispatcher dispatcher = new Dispatcher(this,poolSize,queueDrainSize);
+				} catch (Exception e) {
+					LOGGER.error("KafkaServiceImpl===============异常信息开始开始==============");
+					LOGGER.error(e.getMessage());
+					LOGGER.error("KafkaServiceImpl===============异常信息开始开始==============");
+				}
+			}
 
-		public KafkaConsumerService(String topic,Properties props) {
-			//super("KafkaConsumerService", false);
-			consumer = new KafkaConsumer<>(props);
-			List<String> topicList = FastJSONHelper.deserializeAny(topic,new TypeReference<List<String>>(){});
-			consumer.subscribe(topicList);
 		}
+
+		//处理单条数据
+		@Override
+		public void deal(ConsumerRecord<String, String> msg) {
+			//处理从kafka中抓取的数据
+			dealMsgInput(msg);
+		}
+		//处理多条数据
+		@Override
+		public void dealMsgs(Vector<ConsumerRecord<String, String>> msg) {
+			for(int i = 0;i < msg.size();i++){
+				this.deal(msg.get(i));
+			}
+		}
+		
+		private void dealMsgInput(ConsumerRecord<String, String> record) {
+			try {
+			LOGGER.info("Received message success: (" + record.key() + ", "
+				+ record.value() + ") at offset "
+				+ record.offset());
+
+			JSONObject json = JSONObject.fromObject(record.value());
+			String type = json.getString("type");
+			JSONObject data = json.getJSONObject("data");
+			//取出 设备code 判断是否有效
+			String clientCode = "";
+			if (data.containsKey("clientCode")) {
+			    clientCode = data.getString("clientCode");
+			}
+			//获取设备端数据的id
+			String dataId = "";
+			if(data.containsKey("dataId")){
+			    dataId = data.getString("dataId");
+			}
+			if (StringUtil.isEmpty(clientCode)) {
+			    clientCode = "wanhao_client";
+			}
+			LOGGER.info("clientCode is {}", clientCode);
+			......
+		}
+		......
+	}
 	......
+}
 ```
 QTParking team deploy the Kafka instance on Azure VM, and use MySQL Database on Azure as data service, the Figure 3 and Figure 4 are screenshot of their subscribtion managment portal.
 
@@ -155,7 +209,23 @@ Figure 4. QT-Cloud Kafka VM Console on Azure![QT-Cloud Kafka VM Console on Azure
 In this segment, Microsoft's China DX Technical Evangelist team help QTParking to design the device managment message content. There are three device management message defined in here:
 1.  Device Managment CMD Message from Box, such as device register message 
 ``` 
-这里缺上传的Join的消息
+
+  "header":{
+	  "deviceCode":"taiguli_s_0001",
+	  "topic": "d2c_device_cmd",
+	  "topicPartition": "1",
+	  "signature":"deviceCode=taiguli_s_0001,topic=device_join,key=ipmstaiGuliSouth0001key201705",
+	  "dataCode":"taiguli_s_0001_device_cmd_join_20170320143914567"
+	  },
+  "data":{ 
+	  "createTime": "2017-05-03 19:36:53.546",
+	  "deviceCode":"taiguli_s_0001",
+	  "topic": "d2c_device_cmd",
+	  "dataCode":"taiguli_s_0001_device_join_ab5678_20170320143914567","parkCode": "taiguli",
+	  "cmd":"device_cmd_join"
+	  }
+}
+
 ```
 2.  Device Managment CMD Message to Box, such as register response , device restart, device upgrade, etc. 
 ``` 
@@ -239,32 +309,79 @@ public class MarkManagementController extends BaseParentHandler{
 	......
 
 	/**
-	 * 盒子管理
+	 * 设备查阅
 	 */
 	@ResponseBody
 	@RequestMapping(value = "/query" , method = RequestMethod.GET)
 	public ModelAndView queryMarkManagement(HttpServletRequest request,Long userId, ModelMap modelMap) throws Exception{
 
 		Map<String, Object> map = new HashMap<String, Object>();
-	......
+		......
+	}
 
 	/**
-	 * 新增一个
+	 * 新增设备
 	 */
 	@RequestMapping("/addMarkManagement")
 	@ResponseBody
 	public Map<String, Object> addMarkManagement(HttpServletRequest request) throws Exception{
 
 		Map<String,Object> map = new HashMap<String,Object>();
-        String customercode = request.getParameter("customercode");
-        String clientcode = request.getParameter("clientcode");
-		String parkcode = request.getParameter("parkcode");
-		String parkname = request.getParameter("parkname");
-        String isavailable = request.getParameter("isavailable");
-        String phone = request.getParameter("phone");
-        String address = request.getParameter("address");
+		String customercode = request.getParameter("customercode");
+		String clientcode = request.getParameter("clientcode");
+			String parkcode = request.getParameter("parkcode");
+			String parkname = request.getParameter("parkname");
+		String isavailable = request.getParameter("isavailable");
+		String phone = request.getParameter("phone");
+		String address = request.getParameter("address");
+		......
+	}
+
+	/**
+	 * 删除盒子车场关系
+	 * 后台修改状态的值,前台做删除的功能
+	 */
+	@RequestMapping("/delMarkManagement")
+	@ResponseBody
+	public Map<String,Object> delMarkManagement(HttpServletRequest request){
+		Map<String,Object> map = new HashMap<String,Object>();
+		String id = request.getParameter("id");
+		if (id == null || "".equals(id)) {
+			map.put("status", "fail");
+			map.put("msg", "删除失败,请重试");
+			return map;
+		}
+		int markId = Integer.parseInt(id);
+		......
+	}
+
+	//更新之前预查设备最新信息
+	@RequestMapping(value = "/preEditMarkManagement" ,method = RequestMethod.GET)
+	@ResponseBody
+	public Map<String,Object> preEditMarkManagement(HttpServletRequest request, ModelMap modelMap){
+		Map<String,Object> map = new HashMap<String,Object>();
+		String id = request.getParameter("id");
+		......
+	}
+
+	/**
+	 * 更新盒子车场关系
+	 */
+	@RequestMapping(value = "/updateMarkManagement" )
+	@ResponseBody
+	public Map<String,Object> updateMarkManagement(HttpServletRequest request, ModelMap modelMap){
+		Map<String,Object> map = new HashMap<String,Object>();
+		String id = request.getParameter("id");
+
+		String customercode = request.getParameter("preCustomerCode");
+		String clientcode = request.getParameter("preClientCode");
+		......
+	}
 	......
-   ```
+}
+
+
+```
 This model can be integrated with QT-Cloud managment portal. In the managment portal, administrator can operate the device managment task such as New Device ,Edit Device ,Set Task CMD etc. As Figure 5 and Figure 6.
 
 Figure 5. QT-Cloud Device Managment Page ![QT-Cloud Device Managment Page](/Images/QTParking_005.PNG)
@@ -286,10 +403,10 @@ Figure 8. QTParking Hackfest Team at Office
 
 
 Special thanks QTParking Team, Microsoft China DX Technical Evangelist team and Audience Evanglism Team. This project team includes the following:
-* William Qin -     QTParking CET
+* William Qin -     QTParking CEO
 * Jim Liu  - 	    QTParking CTO
-* Peter Wang -      QTParking IoT R&D Manager
-* Zhaohua Wang -    QTParking R&D Manager
+* Peter Wang -      QTParking IoT R&D Director
+* Zhaohua Wang -    QTParking R&D Director
 * Lingfei Kong -    QTParking Sofeware Engineer
 * Penghui Zhao -    QTParking Sofeware Engineer
 
